@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="从板材、铜层和尺寸读懂 PCB，认识制造流程，并用换算器和复习卡练习。">
+  <meta name="theme-color" content="#103c33">
+  <title>线路板第一课 · PCB 入门</title>
+  <link rel="stylesheet" href="course.css">
+  <script src="course.js" defer></script>
+  <link rel="canonical" href="https://pcb.wealthymuse.com/">
+</head>
+<body>
+  <a class="skip" href="#main">跳到正文</a>
+  <header class="site-header" id="top">
+    <div class="wrap header-inner">
+      <a class="wordmark" href="#top"><span class="logo" aria-hidden="true"></span> PCB 入门课</a>
+      <nav aria-label="快捷导航">
+        <a href="#materials">课程</a>
+        <a href="#converter">换算器</a>
+        <a href="#review">复习卡</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="hero">
+      <div class="wrap hero-inner">
+        <div>
+          <p class="eyebrow">PCB 基础 · 公开版</p>
+          <h1>线路板第一课<span>从材料到生产</span></h1>
+          <p class="hero-copy">从一块四层板出发，认识铜层、基材和孔，再练习读懂尺寸、工艺和制造文件。</p>
+          <a class="primary" href="#materials">开始学习</a>
+        </div>
+        <figure class="stack">
+          <figcaption>四层板叠层示意 <span>非比例</span></figcaption>
+          <ol aria-label="从顶层到底层的材料">
+            <li class="copper"><span>L1</span><span>外层铜</span></li>
+            <li class="prepreg"><span>PP</span><span>半固化片层</span></li>
+            <li class="copper"><span>L2</span><span>内层铜</span></li>
+            <li class="core"><span>CORE</span><span>芯板介质</span></li>
+            <li class="copper"><span>L3</span><span>内层铜</span></li>
+            <li class="prepreg"><span>PP</span><span>半固化片层</span></li>
+            <li class="copper"><span>L4</span><span>外层铜</span></li>
+          </ol>
+          <div class="stack-note">图中 L2、芯板介质和 L3 组成双面覆铜芯板。</div>
+        </figure>
+      </div>
+    </div>
+
+    <div class="wrap course-layout">
+      <aside class="contents">
+        <nav aria-label="课程目录">
+          <p>课程目录</p>
+          <ol>
+            <li><a href="#materials">材料与叠层</a></li>
+            <li><a href="#dimensions">尺寸与单位</a></li>
+            <li><a href="#manufacturing">从开料到成品</a></li>
+            <li><a href="#handoff">看标签与交付文件</a></li>
+            <li><a href="#practice">动手小测</a></li>
+            <li><a href="#review">随堂复习卡</a></li>
+          </ol>
+        </nav>
+      </aside>
+
+      <div class="lesson">
+        <section id="materials">
+          <h2>材料与叠层</h2>
+          <p>印制电路板（PCB）给元器件提供支撑，并用铜线路把电气节点连接起来。刚性多层板由铜和绝缘介质交替构成，金属化孔可以在不同铜层之间建立连接。</p>
+          <dl class="terms">
+            <div><dt>铜箔</dt><dd>经加工形成走线、焊盘和铜平面。走线传输信号或电源，焊盘用于连接元件引脚或孔。</dd></div>
+            <div><dt>芯板 <span>Core</span></dt><dd>多层板的常用芯板是固化的覆铜层压板。上图示例用一张双面覆铜芯板形成中间两层铜。</dd></div>
+            <div><dt>半固化片 <span>PP</span></dt><dd>玻璃布浸渍树脂后形成的半固化材料。压合时树脂流动并固化，将相邻结构粘合，同时形成绝缘介质层。</dd></div>
+            <div><dt>阻焊与字符</dt><dd>阻焊层覆盖并保护指定表面，留出需要焊接的区域。字符层标注位号、方向等装配信息。</dd></div>
+          </dl>
+          <p class="note"><strong>数层时数铜层。</strong> 上图共有 L1 至 L4 四个铜层。每个 PP 区域可由一张或多张半固化片构成，具体由厂家根据介质厚度和材料确定。</p>
+        </section>
+
+        <section id="dimensions">
+          <h2>尺寸与单位</h2>
+          <p>看图先确定测量对象和单位。最常见的三个尺寸是导体本身的宽度、相邻铜边的间距和成品孔的直径。</p>
+          <dl class="terms">
+            <div><dt>线宽</dt><dd>同一根导线两侧铜边之间的距离。</dd></div>
+            <div><dt>线距</dt><dd>两条相邻导线之间，两条面对面的铜边的间隔。</dd></div>
+            <div><dt>成品孔径</dt><dd>工艺完成后的目标孔直径。镀铜会缩小金属化孔的孔径，供应商据此选择制造钻孔尺寸。</dd></div>
+          </dl>
+          <p><strong>1 mm = 1,000 μm。1 mil = 0.001 in = 0.0254 mm = 25.4 μm。</strong></p>
+          <p>铜箔上的 <strong>1 oz</strong> 常指每平方英尺一盎司铜的面密度，对应约 <strong>35 μm</strong> 的标称铜箔厚度。看图时确认要求指的是基铜、加工后的成品铜，还是某个验收下限。三项分别核对。</p>
+
+          <form class="converter" id="converter">
+            <h3>单位换算器</h3>
+            <div class="input-row">
+              <label for="convert-value">尺寸<input id="convert-value" type="number" inputmode="decimal" min="0" step="any" value="6"></label>
+              <label for="convert-unit">输入单位<select id="convert-unit">
+                <option value="mm">毫米（mm）</option>
+                <option value="um">微米（μm）</option>
+                <option value="mil" selected>千分之一英寸（mil）</option>
+              </select></label>
+            </div>
+            <dl class="conversions" aria-live="polite">
+              <div><dt>mm</dt><dd id="answer-mm">0.1524</dd></div>
+              <div><dt>μm</dt><dd id="answer-um">152.4</dd></div>
+              <div><dt>mil</dt><dd id="answer-mil">6</dd></div>
+            </dl>
+            <p id="convert-message" role="status" class="field-message"></p>
+          </form>
+        </section>
+
+        <section id="manufacturing">
+          <h2>从开料到成品</h2>
+          <p>下面是一种常见通孔多层板的简化流程。不同板型的工序、顺序和检验项目随结构及制造路线而变。</p>
+          <ol class="process">
+            <li><strong>开料与内层成像</strong><p>把来料切成适合生产的尺寸，再经曝光、显影和蚀刻形成内层铜图形。</p></li>
+            <li><strong>压合、钻孔与孔金属化</strong><p>把准备好的内层与 PP、外层铜箔叠合压制；再加工通孔，并按设计要求形成导电孔壁。</p></li>
+            <li><strong>外层加工、阻焊与表面处理</strong><p>加工外层铜图形，制作阻焊开窗，对需要焊接的铜面做表面处理。</p></li>
+            <li><strong>成形、测试与检验</strong><p>切出成品外形，检查外观和关键尺寸。电测按网表检查连接和隔离。</p></li>
+          </ol>
+          <h3>大料、工作板和单元</h3>
+          <p>大料是切割前的板材。工作板（panel）留有生产用边框，可包含多个交付拼板或单元。对比利用率时，先明确分子采用成品面积还是含边框的面积。</p>
+          <p>练习假定一张 <strong>400 × 300 mm</strong> 的材料可生产四块 <strong>140 × 100 mm</strong> 的成品。按成品面积计算，利用率是 <strong>56,000 ÷ 120,000 ≈ 46.7%</strong>。是否能排得下，还要看锣槽、工艺边、定位与方向要求。</p>
+        </section>
+
+        <section id="handoff">
+          <h2>看标签与交付文件</h2>
+          <h3>材料标签</h3>
+          <p>先看材料型号、批号、标称厚度与覆铜规格，再核对对应供应商的数据表。<strong>Tg</strong> 是玻璃化转变温度，读值时要看试验方法；它不能直接作为允许工作温度。FR-4 是一种常见材料类别，同类材料仍可能有不同性能。</p>
+          <h3>制造文件</h3>
+          <dl class="terms">
+            <div><dt>Gerber</dt><dd>表示铜图形、阻焊、字符或外形等层信息。载入后对照层表，核对方向、单位、原点和整体位置。</dd></div>
+            <div><dt>钻孔资料</dt><dd>核对单位、坐标、刀具表、孔和槽的类型，并区分金属化与非金属化孔。</dd></div>
+            <div><dt>制造图</dt><dd>确认版本、外形、成品板厚及公差、叠层、材料、成品孔、铜厚与表面处理。需要阻抗控制时，还应确认目标、允许范围、结构及参考层。</dd></div>
+          </dl>
+          <p class="note">例如，同一套资料的两处把成品通孔分别写成 0.25 mm 和 0.30 mm。标明受影响位置、文件版本和两种数值，提出书面问题，取得确认后再更新和发布文件。</p>
+        </section>
+
+        <section id="practice">
+          <h2>动手小测</h2>
+          <p>先写下答案，再展开核对。</p>
+          <details><summary>图纸写线宽 8 mil，换成 mm 和 μm 各是多少？</summary><p>0.2032 mm，203.2 μm。将 8 乘以 0.0254 得到毫米数，乘以 25.4 得到微米数。</p></details>
+          <details><summary>一块四层板的两个 PP 区域各用两张半固化片。板还是几层？</summary><p>四层。层数由铜层计数，PP 张数影响粘合与介质厚度。</p></details>
+          <details><summary>图纸要求 0.30 mm 成品金属化通孔，应直接指定 0.30 mm 的生产钻针吗？</summary><p>应在制造资料里明确成品孔要求，由供应商根据镀层和工艺选择钻孔尺寸。</p></details>
+          <details><summary>原料面积为 120,000 mm²，六块成品各为 12,000 mm²，按成品面积计算的利用率是多少？</summary><p>60%。先用 6 × 12,000 求出总成品面积，再除以 120,000。</p></details>
+        </section>
+
+        <section id="review">
+          <h2>随堂复习卡</h2>
+          <p>试着用自己的话回答，再展开卡片。</p>
+          <div class="flashcards">
+            <details><summary>Core 与 PP 各做什么？</summary><p>Core 是已固化的层压板，常带铜箔。PP 在压合时固化，用于粘接并形成介质。</p></details>
+            <details><summary>1 mil 是多少 μm？</summary><p>25.4 μm。1 mil 是千分之一英寸。</p></details>
+            <details><summary>1 oz 铜对应的标称厚度？</summary><p>约 35 μm。oz 在这里描述铜箔的面密度规格。</p></details>
+            <details><summary>什么情况下会用到阻焊开窗？</summary><p>当焊盘等区域需要外露时，在该区域设计开窗。</p></details>
+            <details><summary>看成品孔之前先确认什么？</summary><p>孔的成品直径、公差以及是金属化孔还是非金属化孔。</p></details>
+            <details><summary>Gerber 和制造图数字冲突怎么办？</summary><p>对照版本，标出位置和差异，经书面确认后更新交付文件。</p></details>
+          </div>
+        </section>
+
+        <section id="sources" class="sources">
+          <h2>参考资料</h2>
+          <p>叠层采用自绘简图，尺寸与排板示例用于课堂练习。实际生产和验收以适用规范、供应商数据表及双方确认的制造文件为准。</p>
+          <ul>
+            <li><a href="https://www.eurocircuits.com/technical-terms-and-abbreviations/">Eurocircuits 术语表</a></li>
+            <li><a href="https://www.ncabgroup.com/pcb-design/">NCAB Group PCB 设计指南</a></li>
+            <li><a href="https://www.advancedpcb.com/en-us/resources/blog/pcb-tolerances-at-advanced-circuits/">AdvancedPCB 制造公差说明</a></li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </main>
+  <footer><div class="wrap footer-inner"><span>线路板第一课</span><a href="#top">回到顶部</a></div></footer>
+</body>
+</html>
